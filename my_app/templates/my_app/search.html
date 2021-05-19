@@ -1,0 +1,15 @@
+{% extends "my_app/layout.html" %}
+{% block title %} Search {% endblock %}
+
+{% block body %}
+  {% load static %}
+  <script src="{% static 'my_app/search.js' %}"></script>
+  
+    <form>
+        <input id="sku" placeholder="SKU" type="text">
+        <input id="name" placeholder="Name" type="text">
+        <input id="description" placeholder="Description" type="text">
+        <input type="submit" value="Search">
+    </form>
+    <div id="search-result"></div>
+{% endblock %}
