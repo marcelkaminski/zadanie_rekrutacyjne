@@ -4,13 +4,6 @@ from django.contrib.staticfiles import finders
 from django.http import JsonResponse
 from django.core.paginator import Paginator, EmptyPage
 
-def index(request):
-    url = finders.find('my_app/data.json')
-    data = open(url).read()
-    jsonData = json.loads(data)
-    return render(request, "my_app/index.html", {'jsonData': jsonData})
-
-
 
 def pagination(request):
     url = finders.find('my_app/data.json')

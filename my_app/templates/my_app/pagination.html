@@ -1,23 +1,24 @@
 {% extends "my_app/layout.html" %}
 {% block title %} Pagination {% endblock %}
+
 {% block body %}
 
-  <div id = 'select_items_per_page'>
-    <a href="{% url 'pagination' %}?items_per_page=10">10 items per page</a>
-    <a href="{% url 'pagination' %}?items_per_page=25">25 items per page</a>
-    <a href="{% url 'pagination' %}?items_per_page=50">50 items per page</a>
-    <a href="{% url 'pagination' %}?items_per_page=100">100 items per page</a>
-    <a href="{% url 'pagination' %}?items_per_page=200">200 items per page</a>
-  </div>
+    <div id = 'select_items_per_page'>
+        <a href="{% url 'pagination' %}?items_per_page=10">10 items per page</a>
+        <a href="{% url 'pagination' %}?items_per_page=25">25 items per page</a>
+        <a href="{% url 'pagination' %}?items_per_page=50">50 items per page</a>
+        <a href="{% url 'pagination' %}?items_per_page=100">100 items per page</a>
+        <a href="{% url 'pagination' %}?items_per_page=200">200 items per page</a>
+    </div>
     <div id='page_navigation'>
-    {% if items.has_previous %}
-        <a href="{% url 'pagination' %}?items_per_page={{per_page}}&page=1">First Page</a>
-        <a href="{% url 'pagination' %}?items_per_page={{per_page}}&page={{items.previous_page_number}}">Previous Page</a>
-    {% endif %}
-    {% if items.has_next %}
-        <a href="{% url 'pagination' %}?items_per_page={{per_page}}&page={{items.next_page_number}}">Next Page</a>
-        <a href="{% url 'pagination' %}?items_per_page={{per_page}}&page={{ items.paginator.num_pages }}">Last Page</a>
-    {% endif %}
+        {% if items.has_previous %}
+            <a href="{% url 'pagination' %}?items_per_page={{per_page}}&page=1">First Page</a>
+            <a href="{% url 'pagination' %}?items_per_page={{per_page}}&page={{items.previous_page_number}}">Previous Page</a>
+        {% endif %}
+        {% if items.has_next %}
+            <a href="{% url 'pagination' %}?items_per_page={{per_page}}&page={{items.next_page_number}}">Next Page</a>
+            <a href="{% url 'pagination' %}?items_per_page={{per_page}}&page={{ items.paginator.num_pages }}">Last Page</a>
+        {% endif %}
     </div>
     <div id='page_list'>
         {% for item in items.paginator.page_range %}
@@ -25,32 +26,31 @@
         {% endfor %}
     </div>
 
-
-<table class="table table-striped">
-<thead class="thead-dark">
-    <tr>
-        <th>SKU</th>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Price</th>
-    </tr>
-</thead>
-{% load discount %}
-<div id='table'>
-{% for item in items %}
-    <tr>
-    <th>{{item.SKU}}</th>
-    <th><a href="{% url 'product' %}?name={{item.name}}"> {{item.name}} </a></th>
-    <th>{{item.description}}</th>
-    {% if item.discount > 0 %}
-        <th><s>{{item.price}}</s> <span style="color:green;">{{ item.price | discount:item.discount }}</span></th>
-    {% else %}
-        <th>{{item.price}}</th>
-    {% endif %}
-    </tr>
-{% endfor %}
-</table>
-</div>
+    <div id='table'>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>SKU</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        {% load discount %}
+            {% for item in items %}
+                <tr>
+                    <th>{{item.SKU}}</th>
+                    <th><a href="{% url 'product' %}?name={{item.name}}"> {{item.name}} </a></th>
+                    <th>{{item.description}}</th>
+                    {% if item.discount > 0 %}
+                        <th><s>{{item.price}}</s> <span style="color:green;">{{ item.price | discount:item.discount }}</span></th>
+                    {% else %}
+                        <th>{{item.price}}</th>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
 
 {% endblock %}
 

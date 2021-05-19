@@ -3,30 +3,28 @@
 
 {% block body %}
 
-{% load discount %}
-<img src="https://image.flaticon.com/icons/png/512/263/263142.png" alt="image">
+    {% load discount %}
+    <img src="https://image.flaticon.com/icons/png/512/263/263142.png" alt="image">
 
-<table class="table table-striped">
-<thead class="thead-dark">
-    <tr>
-        <th>SKU</th>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Price</th>
-    </tr>
-    </thead>
-
-    <tr>
-    <th>{{item.SKU}}</th>
-    <th>{{item.name}}</th>
-    <th>{{item.description}}</th>
-    {% if item.discount > 0 %}
-        <th><s>{{item.price}}</s> <span style="color:green;">{{ item.price | discount:item.discount }}</span></th>
-    {% else %}
-        <th>{{item.price}}</th>
-    {% endif %}
-    </tr>
-</table>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>SKU</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tr>
+            <th>{{item.SKU}}</th>
+            <th>{{item.name}}</th>
+            <th>{{item.description}}</th>
+            {% if item.discount > 0 %}
+                <th><s>{{item.price}}</s> <span style="color:green;">{{ item.price | discount:item.discount }}</span></th>
+            {% else %}
+                <th>{{item.price}}</th>
+            {% endif %}
+        </tr>
+    </table>
 
 {% endblock %}
-
