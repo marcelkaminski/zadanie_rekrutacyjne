@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 {
                     out += `<tr>
                     <th>${arr[i].SKU}</th>
-                    <th><a href="product/?name=${arr[i].name}"> ${arr[i].name}</a></th>
+                    <th><button class='btn btn-primary' value="${arr[i].name}">${arr[i].name}</button></th>
                     <th>${arr[i].description}</th>`;
                     if (arr[i].discount>0){
                         out += `<th><s>${arr[i].price}</s> <span style="color:green;">`
