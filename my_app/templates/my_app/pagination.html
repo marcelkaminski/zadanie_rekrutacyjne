@@ -2,6 +2,8 @@
 {% block title %} Pagination {% endblock %}
 
 {% block body %}
+  {% load static %}
+  <script src="{% static 'my_app/modal.js' %}"></script>
 
     <div id = 'select_items_per_page'>
         <a href="{% url 'pagination' %}?items_per_page=10">10 items per page</a>
@@ -40,7 +42,7 @@
             {% for item in items %}
                 <tr>
                     <th>{{item.SKU}}</th>
-                    <th><a href="{% url 'product' %}?name={{item.name}}"> {{item.name}} </a></th>
+                    <th><button class='btn btn-primary' value="{{item.name}}">{{item.name}}</button></th>
                     <th>{{item.description}}</th>
                     {% if item.discount > 0 %}
                         <th><s>{{item.price}}</s> <span style="color:green;">{{ item.price | discount:item.discount }}</span></th>
@@ -51,6 +53,16 @@
             {% endfor %}
         </table>
     </div>
+
+
+
+<div id="jsModal" class="modal">
+  <div class="modal__overlay jsOverlay"></div>
+  <div class="modal__container">
+    <p>Modal window text</p>
+    <button class="modal__close jsModalClose">&#10005;</button>
+  </div>
+</div>
 
 {% endblock %}
 

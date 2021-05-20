@@ -65,4 +65,4 @@ def get_product_page(request):
     except:
         result = {"message":"No results"}
 
-    return render(request, "my_app/product.html", {'item': result})
+    return JsonResponse(result, safe=False)
